@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Translation System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+            <div class="container mx-auto px-6 py-8">
+                <h1 class="text-4xl font-bold mb-2">📚 Documentation Translation System</h1>
+                <p class="text-blue-100 text-lg">Transform documentation into multilingual static sites with AI-powered translation</p>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Start Translation Project</h2>
+                    
+                    <form id="projectForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Documentation Source
+                            </label>
+                            <select id="sourceType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="github">GitHub Repository</option>
+                                <option value="website">Live Website</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Documentation URL
+                            </label>
+                            <input 
+                                type="text" 
+                                id="docUrl" 
+                                placeholder="https://github.com/user/repo or https://docs.example.com"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                required
+                            >
+                            <p class="mt-2 text-sm text-gray-500">Enter a GitHub repository URL or live documentation website</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Project Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="projectName" 
+                                placeholder="my-docs"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                required
+                            >
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Source Language
+                                </label>
+                                <select id="sourceLang" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Target Language
+                                </label>
+                                <select id="targetLang" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="it">Italian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="ko">Korean</option>
+                                    <option value="ar">Arabic</option>
+                                    <option value="hi">Hindi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <input 
+                                type="checkbox" 
+                                id="createPackage" 
+                                checked
+                                class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                            >
+                            <label for="createPackage" class="text-gray-700 font-medium">
+                                Create downloadable ZIP package for offline use
+                            </label>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            id="startBtn"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+                        >
+                            🚀 Start Translation Process
+                        </button>
+                    </form>
+                </div>
+
+                <div id="progressSection" class="bg-white rounded-xl shadow-lg p-8 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Processing Progress</h2>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span id="statusText" class="text-sm font-semibold text-gray-700">Starting...</span>
+                            <span id="progressPercent" class="text-sm font-semibold text-blue-600">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="progressBar" class="bg-blue-600 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div id="fetchStatus" class="status-indicator">⏳</div>
+                            <span class="text-gray-700">Fetching documentation</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div id="parseStatus" class="status-indicator">⏳</div>
+                            <span class="text-gray-700">Parsing content</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div id="translateStatus" class="status-indicator">⏳</div>
+                            <span class="text-gray-700">Translating text</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div id="buildStatus" class="status-indicator">⏳</div>
+                            <span class="text-gray-700">Building static site</span>
+                        </div>
+                    </div>
+
+                    <div id="resultsSection" class="hidden">
+                        <div class="border-t pt-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">✅ Translation Complete!</h3>
+                            <div id="resultDetails" class="space-y-3 mb-6"></div>
+                            <div id="downloadSection" class="hidden">
+                                <button 
+                                    id="downloadBtn"
+                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+                                >
+                                    📦 Download Documentation Package
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="text-3xl mb-3">🌍</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Multilingual Support</h3>
+                        <p class="text-gray-600 text-sm">Translate documentation into 12+ languages with AI-powered accuracy</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="text-3xl mb-3">📱</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Offline Access</h3>
+                        <p class="text-gray-600 text-sm">Download complete documentation packages for offline browsing</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="text-3xl mb-3">🎨</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Design Preserved</h3>
+                        <p class="text-gray-600 text-sm">Maintains original layout and code formatting perfectly</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-gray-800 text-gray-300 mt-16">
+            <div class="container mx-auto px-6 py-8 text-center">
+                <p>Built with FastAPI, Transformers, and TailwindCSS</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="static/app.js"></script>
+</body>
+</html>
