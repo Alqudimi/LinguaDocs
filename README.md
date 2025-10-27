@@ -1,6 +1,33 @@
 # 📚 Documentation Translation System
 
-A professional, production-ready full-stack application that automatically downloads, parses, translates, and rebuilds documentation sites into multilingual static versions for offline access.
+<p align="center">
+  <a href="https://github.com/Alqudimi/LinguaDocs">
+    <img src="assets/images/logo.png" alt="Project Logo" width="100" height="100">
+  </a>
+</p>
+
+<h1 align="center">LinguaDocs</h1>
+
+<p align="center">
+  A professional, production-ready full-stack application that automatically downloads, parses, translates, and rebuilds documentation sites into multilingual static versions for offline access
+  <br />
+  <br />
+  <a href="https://github.com/Alqudimi/LinguaDocs/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/Alqudimi/LinguaDocs/issues">Request Feature</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Alqudimi/LinguaDocs/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+  </a>
+  <a href="https://github.com/Alqudimi/LinguaDocs/releases">
+    <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="Version">
+  </a>
+  <a href="https://github.com/Alqudimi/LinguaDocs/stargazers">
+    <img src="https://img.shields.io/github/stars/Alqudimi/LinguaDocs.svg?style=social" alt="Stars">
+  </a>
+</p>
 
 ## ✨ Features
 
