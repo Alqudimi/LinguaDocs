@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/Alqudimi/LinguaDocs">
-    <img src="assets/images/logo.png" alt="Project Logo" width="250" height="250">
+    <img src="assets/images/logo.png" alt="Project Logo" width="450" height="450">
   </a>
 </p>
 
